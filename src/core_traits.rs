@@ -456,17 +456,21 @@ trait_impls_without_alpha!(Grb, 3, [g => g, r => r, b => b], "grb({g},{r},{b})",
 trait_impls_without_alpha!(Gray_v09, 1, [v => v], "gray({v})", "gray(#{v:0w$X})", "gray(#{v:0w$x})");
 trait_impls_without_alpha!(Rgbw, 4, [r => r, g => g, b => b, white => w], "rgbw({r},{g},{b},{white})", "#{r:0w$X}{g:0w$X}{b:0w$X}{white:0w$X}", "#{r:0w$x}{g:0w$x}{b:0w$x}{white:0w$x}");
 
-use crate::formats::gray::Gray_v08;
-trait_impls_without_alpha!(Gray_v08, 1, [v => 0], "gray_v0.8({v})", "gray_v0.8(#{v:0w$X})", "gray_v0.8(#{v:0w$x})");
-
 trait_impls_with_alpha!(Rgba, 4, [r => r, g => g, b => b, a => a], "rgba({r},{g},{b},{a})", "#{r:0w$X}{g:0w$X}{b:0w$X}{a:0w$X}", "#{r:0w$x}{g:0w$x}{b:0w$x}{a:0w$x}");
 trait_impls_with_alpha!(Argb, 4, [a => a, r => r, g => g, b => b], "argb({a},{r},{g},{b})", "#{r:0w$X}{g:0w$X}{b:0w$X}{a:0w$X}", "#{r:0w$x}{g:0w$x}{b:0w$x}{a:0w$x}");
 trait_impls_with_alpha!(Bgra, 4, [b => b, g => g, r => r, a => a], "bgra({b},{g},{r},{a})", "#{r:0w$X}{g:0w$X}{b:0w$X}{a:0w$X}", "#{r:0w$x}{g:0w$x}{b:0w$x}{a:0w$x}");
 trait_impls_with_alpha!(Abgr, 4, [a => a, b => b, g => g, r => r], "abgr({a},{b},{g},{r})", "#{r:0w$X}{g:0w$X}{b:0w$X}{a:0w$X}", "#{r:0w$x}{g:0w$x}{b:0w$x}{a:0w$x}");
 trait_impls_with_alpha!(GrayA, 2, [v => v, a => a], "graya({v},{a})", "graya(#{v:0w$X}{a:0w$X})", "graya(#{v:0w$x}{a:0w$x})");
 
-use crate::formats::gray_alpha::GrayAlpha_v08;
-trait_impls_with_alpha!(GrayAlpha_v08, 2, [v => 0, a => 1], "graya_v0.8({v},{a})", "graya_v0.8(#{v:0w$X}{a:0w$X})", "graya_v0.8(#{v:0w$x}{a:0w$x})");
+// Legacy type impls - these types are deprecated but still need trait implementations
+#[allow(deprecated)]
+mod _legacy_core_traits {
+    use super::*;
+    use crate::formats::gray::Gray_v08;
+    use crate::formats::gray_alpha::GrayAlpha_v08;
+    trait_impls_without_alpha!(Gray_v08, 1, [v => 0], "gray_v0.8({v})", "gray_v0.8(#{v:0w$X})", "gray_v0.8(#{v:0w$x})");
+    trait_impls_with_alpha!(GrayAlpha_v08, 2, [v => 0, a => 1], "graya_v0.8({v},{a})", "graya_v0.8(#{v:0w$X}{a:0w$X})", "graya_v0.8(#{v:0w$x}{a:0w$x})");
+}
 
 #[cfg(test)]
 #[test]

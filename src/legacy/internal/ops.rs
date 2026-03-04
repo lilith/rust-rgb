@@ -1,3 +1,5 @@
+#![allow(deprecated)] // This module provides backward-compat impls for legacy types
+
 #[allow(unused_imports)]
 use crate::formats::gray::Gray_v08;
 #[allow(unused_imports)]

@@ -26,14 +26,17 @@ bytemuck!(Abgr);
 bytemuck!(GrayA);
 bytemuck_no_generic!(GrayA44);
 
-use crate::formats::gray_alpha::GrayAlpha_v08;
-bytemuck!(GrayAlpha_v08);
-
-use crate::formats::gray::Gray_v08;
-bytemuck!(Gray_v08);
+#[allow(deprecated)]
+mod _legacy_bytemuck {
+    use crate::formats::gray_alpha::GrayAlpha_v08;
+    use crate::formats::gray::Gray_v08;
+    bytemuck!(GrayAlpha_v08);
+    bytemuck!(Gray_v08);
+}
 
 #[cfg(feature = "as-bytes")]
-impl<T: ::bytemuck::Pod> crate::ComponentBytes<T> for [Gray_v08<T>] {
+#[allow(deprecated)]
+impl<T: ::bytemuck::Pod> crate::ComponentBytes<T> for [crate::formats::gray::Gray_v08<T>] {
     #[inline]
     fn as_bytes(&self) -> &[u8] {
         assert_ne!(0, core::mem::size_of::<T>());
@@ -63,7 +66,8 @@ impl<T: ::bytemuck::Pod> crate::ComponentBytes<T> for [Gray_v09<T>] {
 }
 
 #[cfg(feature = "as-bytes")]
-impl<T: ::bytemuck::Pod> crate::ComponentBytes<T> for [GrayAlpha_v08<T>] {
+#[allow(deprecated)]
+impl<T: ::bytemuck::Pod> crate::ComponentBytes<T> for [crate::formats::gray_alpha::GrayAlpha_v08<T>] {
     #[inline]
     fn as_bytes(&self) -> &[u8] {
         assert_ne!(0, core::mem::size_of::<T>());

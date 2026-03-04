@@ -287,11 +287,14 @@ without_alpha!(Grb, 3, [g, r, b]);
 without_alpha!(Gray_v09, 1, [v]);
 without_alpha!(Rgbw, 4, [r, g, b, w]);
 
-use crate::formats::gray::Gray_v08;
-without_alpha!(Gray_v08, 1, [0]);
-
-use crate::formats::gray_alpha::GrayAlpha_v08;
-with_alpha!(GrayAlpha_v08, 2, [0, 1]);
+#[allow(deprecated)]
+mod _legacy_pixel {
+    use super::*;
+    use crate::formats::gray::Gray_v08;
+    use crate::formats::gray_alpha::GrayAlpha_v08;
+    without_alpha!(Gray_v08, 1, [0]);
+    with_alpha!(GrayAlpha_v08, 2, [0, 1]);
+}
 
 
 #[test]

@@ -66,9 +66,11 @@ pub use formats::abgr::Abgr;
 pub use formats::argb::Argb;
 pub use formats::bgr::Bgr;
 pub use formats::bgra::Bgra;
+#[allow(deprecated)]
 pub use formats::gray::Gray_v08 as Gray;
 pub use formats::gray::Gray_v09;
 pub use formats::gray_a::GrayA;
+#[allow(deprecated)]
 pub use formats::gray_alpha::GrayAlpha_v08 as GrayAlpha;
 pub use formats::gray_a44::GrayA44;
 pub use formats::grb::Grb;

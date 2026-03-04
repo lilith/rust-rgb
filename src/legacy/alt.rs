@@ -1,3 +1,5 @@
+#![allow(deprecated)] // This module provides backward-compat impls for legacy types
+
 use crate::legacy::internal::pixel::{ColorComponentMap, ComponentSlice};
 use core::slice;
 

@@ -2,13 +2,17 @@
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "defmt-03", derive(defmt::Format))]
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
-/// A `Grayscale` pixel
+/// A `Grayscale` pixel (legacy v0.8 type)
 ///
 /// This is the legacy gray pixel type as opposed to the new gray type
 /// (`rgb::Gray_v09`). This type is kept for backwards-compatibility.
 ///
 /// You should transition to the new gray pixel type as this type is
 /// due to be removed in a future release.
+#[deprecated(note = "Use `rgb::Gray_v09` (or `use rgb::Gray_v09 as Gray`). \
+    Replace `Gray(value)` with `Gray { v: value }` or `Gray::new(value)`. \
+    Replace `.0` with `.v`. Replace `*gray` (deref) with `.v` or `.value()`. \
+    This type will be removed in v0.9/v1.0.")]
 #[allow(non_camel_case_types)]
 pub struct Gray_v08<T>(
     /// Grayscale Component. This field will be renamed to `v`.
@@ -57,6 +61,7 @@ impl<T: Copy> Gray_v09<T> {
     }
 }
 
+#[allow(deprecated)]
 impl<T: Copy> Gray_v08<T> {
     /// Value - the brightness component. May be luma or luminance.
     ///
@@ -76,6 +81,7 @@ impl<T: Copy> Gray_v08<T> {
 
 // Rust can't deprecate trait impls
 /// DO NOT USE IT. Not compatible with 0.9
+#[allow(deprecated)]
 impl<T> core::ops::Deref for Gray_v08<T> {
     type Target = T;
 

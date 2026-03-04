@@ -1,3 +1,5 @@
+#![allow(deprecated)] // This module provides backward-compat impls for legacy types
+
 use crate::alt::*;
 use crate::formats::gray::Gray_v08;
 use crate::pixel_traits::pixel::Pixel;

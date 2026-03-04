@@ -77,5 +77,9 @@ has_alpha!(Bgra, a);
 has_alpha!(Abgr, a);
 has_alpha!(GrayA, a);
 
-use crate::formats::gray_alpha::GrayAlpha_v08;
-has_alpha!(GrayAlpha_v08, 1);
+#[allow(deprecated)]
+mod _legacy_has_alpha {
+    use super::*;
+    use crate::formats::gray_alpha::GrayAlpha_v08;
+    has_alpha!(GrayAlpha_v08, 1);
+}

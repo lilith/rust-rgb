@@ -6,7 +6,7 @@ use core::ops::DerefMut;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "defmt-03", derive(defmt::Format))]
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
-/// A pixel for grayscale value + alpha components (rgb crate v0.8)
+/// A pixel for grayscale value + alpha components (legacy v0.8 type)
 ///
 /// This is the legacy gray+alpha pixel type as opposed to the new gray+alpha type
 /// (`rgb::GrayA`). This type is kept for backwards-compatibility.
@@ -16,6 +16,10 @@ use core::ops::DerefMut;
 ///
 /// Through a `Deref` hack it renames the fields from `.0` and `.1`
 /// to `.v` (value) and `.a` (alpha)
+#[deprecated(note = "Use `rgb::GrayA` instead. \
+    Replace `GrayAlpha(v, a)` with `GrayA { v, a }` or `GrayA::new(v, a)`. \
+    Replace `.0` with `.v` and `.1` with `.a`. \
+    This type will be removed in v0.9/v1.0.")]
 #[allow(non_camel_case_types)]
 pub struct GrayAlpha_v08<T, A = T>(
     /// Grayscale Component
@@ -26,6 +30,7 @@ pub struct GrayAlpha_v08<T, A = T>(
     pub A,
 );
 
+#[allow(deprecated)]
 impl<T, A> Deref for GrayAlpha_v08<T, A> {
     type Target = GrayA<T, A>;
 
@@ -35,6 +40,7 @@ impl<T, A> Deref for GrayAlpha_v08<T, A> {
     }
 }
 
+#[allow(deprecated)]
 impl<T, A> DerefMut for GrayAlpha_v08<T, A> {
     /// A trick that allows using `.v` and `.a` on the old `GrayAlpha` type.
     fn deref_mut(&mut self) -> &mut GrayA<T, A> {
@@ -42,6 +48,7 @@ impl<T, A> DerefMut for GrayAlpha_v08<T, A> {
     }
 }
 
+#[allow(deprecated)]
 impl<T: Clone, A> GrayAlpha_v08<T, A> {
     /// Value - the brightness component. May be luma or luminance.
     ///
@@ -52,6 +59,7 @@ impl<T: Clone, A> GrayAlpha_v08<T, A> {
 }
 
 #[test]
+#[allow(deprecated)]
 fn swizzle() {
     let g = GrayAlpha_v08(10_u8, 20_u8);
     assert_eq!(10, g.v);
